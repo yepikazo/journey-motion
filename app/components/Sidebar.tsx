@@ -34,7 +34,11 @@ export default function Sidebar({
       style={{ width: EXPANDED }}
       className="sticky top-0 flex h-screen shrink-0 flex-col bg-coal text-cream"
     >
-      <div className="flex items-center justify-between px-4 pt-5 pb-4">
+      <div
+        className={`flex items-center pt-5 pb-4 ${
+          collapsed ? 'justify-center px-0' : 'justify-between px-4'
+        }`}
+      >
         <div
           className={`overflow-hidden transition-opacity duration-200 ${
             collapsed ? 'w-0 opacity-0' : 'w-auto opacity-100'
@@ -50,7 +54,7 @@ export default function Sidebar({
         <button
           onClick={onToggle}
           aria-label={collapsed ? 'Buka sidebar' : 'Tutup sidebar'}
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-coal-soft text-cream transition-colors hover:bg-[#333333]"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg  text-cream transition-colors"
         >
           {collapsed ? (
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -76,7 +80,11 @@ export default function Sidebar({
         </button>
       </div>
 
-      <nav className="flex flex-1 flex-col gap-1 px-3">
+      <nav
+        className={`flex flex-1 flex-col gap-1 ${
+          collapsed ? 'items-center px-0' : 'px-3'
+        }`}
+      >
         {navigation.map((item) => {
           const active = pathname === item.href;
           return (
@@ -84,10 +92,12 @@ export default function Sidebar({
               key={item.href}
               href={item.href}
               title={item.description}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${
+              className={`flex items-center rounded-lg text-sm transition-colors ${
+                collapsed ? 'h-8 w-8 justify-center px-0' : 'gap-3 px-3 py-1.5'
+              } ${
                 active
-                  ? 'bg-coal-soft font-medium text-cream'
-                  : 'text-cream/70 hover:bg-coal-soft/60 hover:text-cream'
+                  ? ' text-cream font-extrabold'
+                  : 'text-cream/70  hover:text-cream'
               }`}
             >
               <span
